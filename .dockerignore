@@ -1,0 +1,14 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Local files
+.env
+*.local
+npm-debug.log*
