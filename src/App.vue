@@ -24,7 +24,7 @@ const fetchLocalModels = async () => {
   statusMessage.value = 'Fetching local models...';
   isLoading.value = true;
   try {
-    const response = await fetch('modelmanager/api/models');
+    const response = await fetch('api/models');
     if (!response.ok) throw new Error('Failed to fetch local models');
     const data = await response.json();
     localModels.value = data.models || [];
