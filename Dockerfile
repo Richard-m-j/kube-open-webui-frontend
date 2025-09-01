@@ -10,8 +10,12 @@ RUN npm run build
 FROM nginx:1.29.1-alpine-slim
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # --- THIS IS THE FIX ---
-# Copy the contents of /app/dist, not the directory itself
-COPY --from=builder /app/dist/ /usr/share/nginx/html
+# Create the modelmanager directory and copy the built assets into it.
+# This makes the container's file structure match the URL structure.
+WORKDIR /usr/share/nginx/html
+RUN mkdir modelmanager
+COPY --from=builder /app/dist/ ./modelmanager/
 
 EXPOSE 80
