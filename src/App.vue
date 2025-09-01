@@ -24,8 +24,8 @@ const fetchLocalModels = async () => {
   statusMessage.value = 'Fetching local models...';
   isLoading.value = true;
   try {
-    // Use absolute path for API calls
-    const response = await fetch('/api/models');
+    // UPDATED: Calls the proxied endpoint
+    const response = await fetch('/modelmanager/api/models');
     if (!response.ok) throw new Error('Failed to fetch local models');
     const data = await response.json();
     localModels.value = data.models || [];
@@ -47,15 +47,15 @@ const addModel = async (modelToPull) => {
   statusMessage.value = `Pulling model: ${modelToPull}... (This can take a while)`;
   isLoading.value = true;
   try {
-    // Use absolute path for API calls
-    const response = await fetch('/api/models/pull', {
+    // UPDATED: Calls the proxied endpoint
+    const response = await fetch('/modelmanager/api/models/pull', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: modelToPull }),
     });
 
     if (!response.ok) throw new Error(`Failed to pull model. Server responded with status ${response.status}`);
-    
+
     // The response from Ollama is a stream of JSON objects. We'll just read it to completion.
     await response.body.getReader().read();
 
