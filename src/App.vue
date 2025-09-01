@@ -24,7 +24,8 @@ const fetchLocalModels = async () => {
   statusMessage.value = 'Fetching local models...';
   isLoading.value = true;
   try {
-    const response = await fetch('api/models');
+    // Use absolute path for API calls
+    const response = await fetch('/api/models');
     if (!response.ok) throw new Error('Failed to fetch local models');
     const data = await response.json();
     localModels.value = data.models || [];
@@ -46,7 +47,8 @@ const addModel = async (modelToPull) => {
   statusMessage.value = `Pulling model: ${modelToPull}... (This can take a while)`;
   isLoading.value = true;
   try {
-    const response = await fetch('api/models/pull', {
+    // Use absolute path for API calls
+    const response = await fetch('/api/models/pull', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: modelToPull }),
