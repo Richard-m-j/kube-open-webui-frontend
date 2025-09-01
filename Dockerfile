@@ -12,6 +12,6 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 # --- THIS IS THE FIX ---
 # Copy the contents of /app/dist, not the directory itself
-COPY --from=builder /app/dist/. /usr/share/nginx/html
+COPY --from=builder /app/dist/ /usr/share/nginx/html
 
 EXPOSE 80
