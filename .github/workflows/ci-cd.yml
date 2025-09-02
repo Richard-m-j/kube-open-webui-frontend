@@ -9,6 +9,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    
+    # Add this permissions block to grant the necessary access
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
 
     steps:
     - name: Checkout repository
@@ -28,17 +34,14 @@ jobs:
     - name: Software Component Analysis (SCA)
       run: npm audit --audit-level=high
     
-    # Initialize CodeQL scanning
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
         languages: 'javascript'
 
-    # Autobuild attempts to build any compiled languages  
     - name: Autobuild
       uses: github/codeql-action/autobuild@v3
 
-    # Perform the CodeQL analysis
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
 
