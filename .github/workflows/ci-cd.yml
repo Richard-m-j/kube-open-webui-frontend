@@ -27,15 +27,20 @@ jobs:
 
     - name: Software Component Analysis (SCA)
       run: npm audit --audit-level=high
-
-    - name: Static Application Security Testing (SAST) with Gitleaks
-      uses: gitleaks/gitleaks-action@v2
+    
+    # Initialize CodeQL scanning
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
       with:
-        config-path: .gitleaks.toml # Optional: for custom rules
+        languages: 'javascript'
 
-    # As there are no unit tests, this step is commented out.
-    # - name: Run unit tests
-    #   run: npm run test:unit
+    # Autobuild attempts to build any compiled languages  
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+
+    # Perform the CodeQL analysis
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
 
     - name: Build application
       run: npm run build
