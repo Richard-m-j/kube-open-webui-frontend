@@ -21,6 +21,9 @@ spec:
           requests:
             cpu: "100m"
             memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
         livenessProbe:
           tcpSocket:
             port: 80
