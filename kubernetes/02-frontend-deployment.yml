@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: modelmanager-frontend
-        image: richardjoseph1/modelmanager-frontend-kube-openwebui:25622557d14ad28b03ea128f7263021baeecfd4d
+        image: richardjoseph1/modelmanager-frontend-kube-openwebui:5cc2e9fd1df231cf1f478605eab4d38af1123375
         ports:
         - containerPort: 80
         resources:
